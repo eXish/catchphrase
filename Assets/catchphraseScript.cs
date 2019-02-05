@@ -813,4 +813,43 @@ public class catchphraseScript : MonoBehaviour
         yield return new WaitForSeconds(4f);
         shrinking = false;
     }
+
+	bool InRange(int number, int min, int max)
+	{
+		return max >= number && number >= min;
+	}
+
+	public string TwitchHelpMessage = "Press a panel at a specific digit using !{0} panel 2 at 8. Panels are in english reading order. Submit a number using !{0} submit 480.";
+
+	public IEnumerator ProcessTwitchCommand(string inputCommand)
+	{
+		string[] commands = inputCommand.ToLowerInvariant().Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+		int panelPosition = 0;
+		int timerDigit = 0;
+		int result = 0;
+		if (commands.Length == 2 && commands[0] == "submit" && commands[1].Length <= 5 && int.TryParse(commands[1], out result))
+		{
+			yield return null;
+
+			foreach (char digit in commands[1])
+			{
+				keypads[digit != '0' ? digit - '1' : 9].OnInteract();
+				yield return new WaitForSeconds(0.1f);
+			}
+
+			submitButton.OnInteract();
+			yield return new WaitForSeconds(0.1f);
+		}
+		else if (commands.Length == 4 && commands[0] == "panel" && int.TryParse(commands[1], out panelPosition) && InRange(panelPosition, 1, 4) && commands[2] == "at" && int.TryParse(commands[3], out timerDigit) && InRange(timerDigit, 0, 9))
+		{
+			yield return null;
+
+			while (Mathf.RoundToInt(Bomb.GetTime()) % 10 != timerDigit)
+				yield return "trycancel The panel was not opened due to a request to cancel.";
+
+			panels[panelPosition - 1].OnInteract();
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
 }
