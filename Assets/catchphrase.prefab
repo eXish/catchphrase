@@ -6158,6 +6158,8 @@ MonoBehaviour:
   - {fileID: 23307964795604008}
   - {fileID: 23312777737699162}
   answerBox: {fileID: 102495726396196074}
+  TwitchHelpMessage: Press a panel at a specific digit using !{0} panel 2 at 8. Panels
+    are in english reading order. Submit a number using !{0} submit 480.
 --- !u!114 &114415717450036916
 MonoBehaviour:
   m_ObjectHideFlags: 1
