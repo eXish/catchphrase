@@ -640,7 +640,7 @@ public class catchphraseScript : MonoBehaviour
         timeOfPressInt = (Mathf.FloorToInt(timeOfPress)) % 10;
         if(timeOfPressInt != pressTimes[stage-1])
         {
-            Debug.LogFormat("[Catchphrase #{0}] Strike! You pressed the {1} panel when the last digit of the bomb timer was {2}. That is not correct.", moduleId, panel.GetComponent<panels>().logPosition, pressTimes[2]);
+            Debug.LogFormat("[Catchphrase #{0}] Strike! You pressed the {1} panel when the last digit of the bomb timer was {2}. That is not correct.", moduleId, panel.GetComponent<panels>().logPosition, timeOfPressInt);
             GetComponent<KMBombModule>().HandleStrike();
             return;
         }
