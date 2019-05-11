@@ -845,7 +845,7 @@ public class catchphraseScript : MonoBehaviour
 		{
 			yield return null;
 
-			while (Mathf.RoundToInt(Bomb.GetTime()) % 10 != timerDigit)
+			while (Mathf.FloorToInt(Bomb.GetTime()) % 10 != timerDigit)
 				yield return "trycancel The panel was not opened due to a request to cancel.";
 
 			panels[panelPosition - 1].OnInteract();
