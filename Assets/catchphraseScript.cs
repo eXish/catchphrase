@@ -9,6 +9,7 @@ public class catchphraseScript : MonoBehaviour
 {
     public KMBombInfo Bomb;
     public KMAudio Audio;
+    public KMColorblindMode Colourblind;
     public KMSelectable[] panels;
     public KMSelectable[] keypads;
     public KMSelectable clearButton;
@@ -35,6 +36,7 @@ public class catchphraseScript : MonoBehaviour
     public Color[] fontColours;
 
     private List<string> selectedColours = new List<string>();
+    private bool colourblindEnabled;
 
     public List<KMSelectable> correctPanels1 = new List<KMSelectable>();
     private bool stage1Correct;
@@ -82,6 +84,7 @@ public class catchphraseScript : MonoBehaviour
 
     void Start()
     {
+        colourblindEnabled = Colourblind.ColorblindModeActive;
         answerBox.text = "";
         SetNumbers();
         GetTimingRow();
@@ -150,6 +153,8 @@ public class catchphraseScript : MonoBehaviour
             int index = UnityEngine.Random.Range(0,6);
             panel.material = panelColourOptions[index];
             panel.GetComponent<panels>().colour = panelColourOptions[index].name;
+            if (colourblindEnabled)
+                panel.GetComponent<panels>().colourblindText.text = panelColourOptions[index].name[0].ToString();
             selectedColours.Add(panelColourOptions[index].name);
         }
         Debug.LogFormat("[Catchphrase #{0}] Your panel colours in reading order are {1}.", moduleId, string.Join(", ", selectedColours.Select((x) => x).ToArray()));
@@ -819,7 +824,7 @@ public class catchphraseScript : MonoBehaviour
 		return max >= number && number >= min;
 	}
 
-	public string TwitchHelpMessage = "Press a panel at a specific digit using !{0} panel 2 at 8. Panels are in english reading order. Submit a number using !{0} submit 480.";
+	public string TwitchHelpMessage = "Press a panel at a specific digit using !{0} panel 2 at 8. Panels are in english reading order. Submit a number using !{0} submit 480. Toggle colourblind mode using !{0} colourblind.";
 
 	public IEnumerator ProcessTwitchCommand(string inputCommand)
 	{
@@ -828,7 +833,20 @@ public class catchphraseScript : MonoBehaviour
 		int panelPosition = 0;
 		int timerDigit = 0;
 		int result = 0;
-		if (commands.Length == 2 && commands[0] == "submit" && commands[1].Length <= 5 && int.TryParse(commands[1], out result))
+        if (commands.Length == 1 && commands[0] == "colourblind")
+        {
+            yield return null;
+
+            colourblindEnabled = !colourblindEnabled;
+            foreach (Renderer panel in panelRenderers)
+            {
+                if (colourblindEnabled)
+                    panel.GetComponent<panels>().colourblindText.text = panel.GetComponent<panels>().colour[0].ToString();
+                else
+                    panel.GetComponent<panels>().colourblindText.text = "";
+            }
+        }
+		else if (commands.Length == 2 && commands[0] == "submit" && commands[1].Length <= 5 && int.TryParse(commands[1], out result))
 		{
 			yield return null;
 
