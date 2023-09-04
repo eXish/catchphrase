@@ -6030,7 +6030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f2d5aa885c74d5fab3b3d7d344a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colourblindText: {fileID: 102045060382288574}
+  colorblindText: {fileID: 102045060382288574}
   position: BL
   colour: 
   logPosition: bottom left
@@ -6388,7 +6388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f2d5aa885c74d5fab3b3d7d344a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colourblindText: {fileID: 102836528843124326}
+  colorblindText: {fileID: 102836528843124326}
   position: BR
   colour: 
   logPosition: bottom right
@@ -6456,7 +6456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f2d5aa885c74d5fab3b3d7d344a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colourblindText: {fileID: 102850154266761776}
+  colorblindText: {fileID: 102850154266761776}
   position: TL
   colour: 
   logPosition: top left
@@ -6569,7 +6569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bomb: {fileID: 114465610307440812}
   Audio: {fileID: 114008746876063014}
-  Colourblind: {fileID: 114532402135263380}
+  Colorblind: {fileID: 114532402135263380}
   panels:
   - {fileID: 114502392983742888}
   - {fileID: 114186132678527820}
@@ -7444,7 +7444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f2d5aa885c74d5fab3b3d7d344a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colourblindText: {fileID: 102781174919657630}
+  colorblindText: {fileID: 102781174919657630}
   position: TR
   colour: 
   logPosition: top right

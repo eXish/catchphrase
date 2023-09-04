@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class panels : MonoBehaviour {
 
-	public TextMesh colourblindText;
+	public TextMesh colorblindText;
 	public string position;
 	public string colour;
 	public string logPosition;
